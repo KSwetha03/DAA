@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+#define MAX_ROW 10
+#define MAX_COL 10
+
+void multiplyMatrices(int firstMatrix[MAX_ROW][MAX_COL], int secondMatrix[MAX_ROW][MAX_COL], int result[MAX_ROW][MAX_COL], int rowFirst, int colFirst, int rowSecond, int colSecond);
+
+int main() {
+    int rowFirst, colFirst, rowSecond, colSecond;
+
+    printf("Enter rows and columns for the first matrix: ");
+    scanf("%d %d", &rowFirst, &colFirst);
+
+    printf("Enter rows and columns for the second matrix: ");
+    scanf("%d %d", &rowSecond, &colSecond);
+
+    // Taking input until columns of the first matrix are equal to rows of the second matrix
+    while (colFirst != rowSecond) {
+        printf("Error! column of the first matrix not equal to row of the second.\n");
+
+        printf("Enter rows and columns for the first matrix: ");
+        scanf("%d %d", &rowFirst, &colFirst);
+
+        printf("Enter rows and columns for the second matrix: ");
+        scanf("%d %d", &rowSecond, &colSecond);
+    }
+
+    int firstMatrix[MAX_ROW][MAX_COL], secondMatrix[MAX_ROW][MAX_COL], result[MAX_ROW][MAX_COL];
+
+    printf("\nEnter elements of matrix 1:\n");
+    for (int i = 0; i < rowFirst; ++i) {
+        for (int j = 0; j < colFirst; ++j) {
+            scanf("%d", &firstMatrix[i][j]);
+        }
+    }
+
+    printf("\nEnter elements of matrix 2:\n");
+    for (int i = 0; i < rowSecond; ++i) {
+        for (int j = 0; j < colSecond; ++j) {
+            scanf("%d", &secondMatrix[i][j]);
+        }
+    }
+
+    multiplyMatrices(firstMatrix, secondMatrix, result, rowFirst, colFirst, rowSecond, colSecond);
+
+    // Displaying the multiplication result
+    printf("\nResultant matrix:\n");
+    for (int i = 0; i < rowFirst; ++i) {
+        for (int j = 0; j < colSecond; ++j) {
+            printf("%d  ", result[i][j]);
+            if (j == colSecond - 1)
+                printf("\n");
+        }
+    }
+
+    return 0;
+}
+
+void multiplyMatrices(int firstMatrix[MAX_ROW][MAX_COL], int secondMatrix[MAX_ROW][MAX_COL], int result[MAX_ROW][MAX_COL], int rowFirst, int colFirst, int rowSecond, int colSecond) {
+    // Initializing elements of result matrix to 0
+    for (int i = 0; i < rowFirst; ++i) {
+        for (int j = 0; j < colSecond; ++j) {
+            result[i][j] = 0;
+        }
+    }
+
+    // Multiplying firstMatrix and secondMatrix and storing in
